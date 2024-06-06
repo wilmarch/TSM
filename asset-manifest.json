@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TSM/static/css/main.e4032967.css",
+    "main.js": "/TSM/static/js/main.14905f2e.js",
+    "static/js/453.4174c4d2.chunk.js": "/TSM/static/js/453.4174c4d2.chunk.js",
+    "index.html": "/TSM/index.html",
+    "main.e4032967.css.map": "/TSM/static/css/main.e4032967.css.map",
+    "main.14905f2e.js.map": "/TSM/static/js/main.14905f2e.js.map",
+    "453.4174c4d2.chunk.js.map": "/TSM/static/js/453.4174c4d2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e4032967.css",
+    "static/js/main.14905f2e.js"
+  ]
+}
