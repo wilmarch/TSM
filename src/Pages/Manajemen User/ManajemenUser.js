@@ -5,7 +5,9 @@ function ManajemenUser() {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    password: '',
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   });
   const navigate = useNavigate();
 
@@ -17,8 +19,7 @@ function ManajemenUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data:", user);
-    // Logic to handle form submission, such as sending data to backend
-    navigate('/dashboard'); // Navigate to dashboard after form submission
+    navigate('/dashboard');
   };
 
   return (
@@ -28,7 +29,9 @@ function ManajemenUser() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <InputField label="Name" name="name" value={user.name} onChange={handleChange} />
           <InputField label="Email" type="email" name="email" value={user.email} onChange={handleChange} />
-          <InputField label="Password" type="password" name="password" value={user.password} onChange={handleChange} />
+          <PasswordInput label="Old Password" name="oldPassword" value={user.oldPassword} onChange={handleChange} />
+          <PasswordInput label="New Password" name="newPassword" value={user.newPassword} onChange={handleChange} />
+          <PasswordInput label="Confirm New Password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
           <button type="submit" className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Save Changes
           </button>
@@ -43,6 +46,33 @@ function InputField({ label, type = 'text', name, value, onChange }) {
     <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <input type={type} name={name} value={value} onChange={onChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+    </div>
+  );
+}
+
+function PasswordInput({ label, name, value, onChange }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  return (
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">{label}</label>
+      <div className="relative">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          name={name}
+          value={value}
+          onChange={onChange}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        />
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute inset-y-0 right-0 px-3 flex items-center text-sm text-gray-500"
+        >
+          {showPassword ? 'Hide' : 'Show'}
+        </button>
+      </div>
     </div>
   );
 }
