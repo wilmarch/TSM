@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EntriItemsType = () => {
   const [formData, setFormData] = useState({
     type: '',
     currentStock: ''
   });
+
+  const navigate = useNavigate(); // Hook untuk navigasi
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +22,7 @@ const EntriItemsType = () => {
     console.log("New type data:", formData);
     // Logic to send this data to the server or data management function
     alert('Type has been submitted successfully!');
+    navigate('/items-type'); // Navigasi kembali ke halaman Items Type
   };
 
   return (

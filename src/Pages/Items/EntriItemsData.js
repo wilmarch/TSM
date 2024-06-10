@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EntriItemsData = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,7 @@ const EntriItemsData = () => {
     category: '',
     currentStock: ''
   });
+  const navigate = useNavigate(); // inisialisasi useNavigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +21,9 @@ const EntriItemsData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("New item data:", formData);
+    // Logika untuk menyimpan data
     alert('Item has been submitted successfully!');
+    navigate('/items-data'); // Menavigasi kembali ke halaman Items Data setelah submit
   };
 
   return (
