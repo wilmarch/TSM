@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 const EntriItemsData = () => {
   const [formData, setFormData] = useState({
-    partNumber: '',
+    partNumber: 'Default Part Number', // Part number sudah diisi otomatis
     manufacture: '',
     category: '',
     currentStock: ''
   });
-  const navigate = useNavigate(); // inisialisasi useNavigate
+  const navigate = useNavigate();
+
+  const categories = ['Component', 'Raw Material', 'Finished Goods']; // Contoh kategori
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +23,8 @@ const EntriItemsData = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("New item data:", formData);
-    // Logika untuk menyimpan data
     alert('Item has been submitted successfully!');
-    navigate('/items-data'); // Menavigasi kembali ke halaman Items Data setelah submit
+    navigate('/items-data');
   };
 
   return (
@@ -39,7 +40,7 @@ const EntriItemsData = () => {
             value={formData.partNumber}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
-            required
+            readOnly // Tidak dapat diubah oleh pengguna
           />
         </div>
         <div className="mb-4">
@@ -56,15 +57,17 @@ const EntriItemsData = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category:</label>
-          <input
-            type="text"
+          <select
             name="category"
             id="category"
             value={formData.category}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
-            required
-          />
+            required>
+            {categories.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label htmlFor="currentStock" className="block text-sm font-medium text-gray-700">Current Stock:</label>

@@ -3,26 +3,27 @@ import { useNavigate } from 'react-router-dom';
 
 const EntriItemsType = () => {
   const [formData, setFormData] = useState({
-    type: '',
+    type: 'Default Type', // You can set a default type here or fetch it from somewhere if needed
     currentStock: ''
   });
 
-  const navigate = useNavigate(); // Hook untuk navigasi
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    if (name === 'currentStock') { // Ensuring only 'currentStock' can be changed by the user
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("New type data:", formData);
-    // Logic to send this data to the server or data management function
     alert('Type has been submitted successfully!');
-    navigate('/items-type'); // Navigasi kembali ke halaman Items Type
+    navigate('/items-type');
   };
 
   return (
@@ -38,7 +39,7 @@ const EntriItemsType = () => {
             value={formData.type}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
-            required
+            readOnly // This makes the input field read-only, so the user cannot change it
           />
         </div>
         <div className="mb-4">
