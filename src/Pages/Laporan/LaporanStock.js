@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { FaFilePdf, FaFileExcel } from 'react-icons/fa';  
+import { FaFilePdf, FaFileExcel } from 'react-icons/fa';
 
 const LaporanStock = () => {
     const [data] = useState([
-        { tanggal: '1 January 2024', type: 'Component', partNumber: 'RLSGD2510VIC', manufacture: 'YAGEO', jumlahStock: 9487 },
-        { tanggal: '2 January 2024', type: 'Component', partNumber: 'MUP-C7802I-1', manufacture: 'Samsung Electro-Mechanics', jumlahStock: 4189 },
-        // Add more dummy data as required
+        { nomor: 1, tanggal: '1 January 2024', project: 'Project Alpha', type: 'Component', partNumber: 'RLSGD2510VIC', manufacture: 'YAGEO', jumlahStock: 9487 },
+        { nomor: 2, tanggal: '2 January 2024', project: 'Project Beta', type: 'Component', partNumber: 'MUP-C7802I-1', manufacture: 'Samsung Electro-Mechanics', jumlahStock: 4189 },
+        // Additional data can be added here
     ]);
-    const [itemsToShow, setItemsToShow] = useState(10); // Default number of items to show
+    const [itemsToShow, setItemsToShow] = useState(10);
     const [dateRange, setDateRange] = useState({ start: '', end: '' });
 
     const handleDateChange = (e) => {
@@ -38,11 +38,12 @@ const LaporanStock = () => {
                 </div>
             </div>
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white shadow-md rounded-lg">
+                <table className="min-w-full bg-white shadow-md rounded-lg table-auto">
                     <thead className="bg-red-500 text-white">
                         <tr>
-                            <th className="px-4 py-3 uppercase font-semibold text-sm">No</th>
+                            <th className="px-4 py-3 uppercase font-semibold text-sm">Nomor</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Tanggal</th>
+                            <th className="px-4 py-3 uppercase font-semibold text-sm">Project</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Type</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Part Number</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Manufacture</th>
@@ -52,12 +53,13 @@ const LaporanStock = () => {
                     <tbody className="text-gray-700">
                         {data.slice(0, itemsToShow).map((item, index) => (
                             <tr key={index} className="hover:bg-gray-100">
-                                <td className="px-4 py-3">{index + 1}</td>
+                                <td className="px-4 py-3 text-center">{index + 1}</td>
                                 <td className="px-4 py-3">{item.tanggal}</td>
+                                <td className="px-4 py-3">{item.project}</td>
                                 <td className="px-4 py-3">{item.type}</td>
                                 <td className="px-4 py-3">{item.partNumber}</td>
                                 <td className="px-4 py-3">{item.manufacture}</td>
-                                <td className="px-4 py-3">{item.jumlahStock}</td>
+                                <td className="px-4 py-3 text-center">{item.jumlahStock}</td>
                             </tr>
                         ))}
                     </tbody>

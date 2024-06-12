@@ -3,8 +3,8 @@ import { FaFilePdf, FaFileExcel } from 'react-icons/fa';
 
 const LaporanBarangKeluar = () => {
     const [data] = useState([
-        { tanggal: '1 January 2024', type: 'Component', partNumber: 'RLSGD2510VIC', manufacture: 'YAGEO', barangKeluar: 200 },
-        { tanggal: '2 January 2024', type: 'Component', partNumber: 'MUP-C7802I-1', manufacture: 'Samsung Electro-Mechanics', barangKeluar: 150 },
+        { tanggal: '1 January 2024', project: 'Project Alpha', type: 'Component', partNumber: 'RLSGD2510VIC', manufacture: 'YAGEO', barangKeluar: 200 },
+        { tanggal: '2 January 2024', project: 'Project Beta', type: 'Component', partNumber: 'MUP-C7802I-1', manufacture: 'Samsung Electro-Mechanics', barangKeluar: 150 },
         // Add more dummy data as required
     ]);
     const [itemsToShow, setItemsToShow] = useState(10); // Default number of items to show
@@ -41,23 +41,25 @@ const LaporanBarangKeluar = () => {
                 <table className="min-w-full bg-white shadow-md rounded-lg">
                     <thead className="bg-red-500 text-white">
                         <tr>
-                            <th className="px-4 py-3 uppercase font-semibold text-sm">No</th>
+                            <th className="px-4 py-3 uppercase font-semibold text-sm text-center">No</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Tanggal</th>
+                            <th className="px-4 py-3 uppercase font-semibold text-sm">Proyek</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Type</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Part Number</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Manufacture</th>
-                            <th className="px-4 py-3 uppercase font-semibold text-sm">Barang Keluar</th>
+                            <th className="px-4 py-3 uppercase font-semibold text-sm text-center">Barang Keluar</th>
                         </tr>
                     </thead>
                     <tbody className="text-gray-700">
                         {data.slice(0, itemsToShow).map((item, index) => (
                             <tr key={index} className="hover:bg-gray-100">
-                                <td className="px-4 py-3">{index + 1}</td>
+                                <td className="px-4 py-3 text-center">{index + 1}</td>
                                 <td className="px-4 py-3">{item.tanggal}</td>
+                                <td className="px-4 py-3">{item.project}</td>
                                 <td className="px-4 py-3">{item.type}</td>
                                 <td className="px-4 py-3">{item.partNumber}</td>
                                 <td className="px-4 py-3">{item.manufacture}</td>
-                                <td className="px-4 py-3">{item.barangKeluar}</td>
+                                <td className="px-4 py-3 text-center">{item.barangKeluar}</td>
                             </tr>
                         ))}
                     </tbody>
