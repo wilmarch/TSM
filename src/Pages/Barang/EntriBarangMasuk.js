@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const EntriBarangMasuk = () => {
   const [formData, setFormData] = useState({
-    transactionId: '',
+    transactionId: 'AUTOGENERATE',  // ID Transaksi akan digenerate otomatis
     dateIn: '',
     type: '',
     stockIn: '',
@@ -20,7 +20,6 @@ const EntriBarangMasuk = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form data submitted:", formData);
-    // Simulasi pengiriman data ke server
     alert('Data barang masuk berhasil disubmit!');
     navigate('/barang-masuk'); // Navigasi kembali ke halaman Barang Masuk
   };
@@ -31,23 +30,54 @@ const EntriBarangMasuk = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="transactionId" className="block text-sm font-medium text-gray-700">ID Transaksi:</label>
-          <input type="text" name="transactionId" id="transactionId" value={formData.transactionId} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none" required />
+          <input
+            type="text"
+            name="transactionId"
+            id="transactionId"
+            value={formData.transactionId}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
+            disabled
+          />
         </div>
         <div className="mb-4">
           <label htmlFor="dateIn" className="block text-sm font-medium text-gray-700">Tanggal Masuk:</label>
-          <input type="date" name="dateIn" id="dateIn" value={formData.dateIn} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none" required />
+          <input
+            type="date"
+            name="dateIn"
+            id="dateIn"
+            value={formData.dateIn}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
+            required
+          />
         </div>
         <div className="mb-4">
           <label htmlFor="type" className="block text-sm font-medium text-gray-700">Tipe:</label>
-          <input type="text" name="type" id="type" value={formData.type} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none" required />
+          <select
+            name="type"
+            id="type"
+            value={formData.type}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
+            required
+          >
+            <option value="">Pilih Tipe</option>
+            <option value="RLSD290A5LIC/Component/YAGEO">RLSD290A5LIC/Component/YAGEO</option>
+            <option value="MUP-C7802I-1/Component/Samsung">MUP-C7802I-1/Component/Samsung</option>
+          </select>
         </div>
         <div className="mb-4">
           <label htmlFor="stockIn" className="block text-sm font-medium text-gray-700">Stok Masuk:</label>
-          <input type="number" name="stockIn" id="stockIn" value={formData.stockIn} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none" required />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="totalStock" className="block text-sm font-medium text-gray-700">Total Stok:</label>
-          <input type="number" name="totalStock" id="totalStock" value={formData.totalStock} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none" required />
+          <input
+            type="number"
+            name="stockIn"
+            id="stockIn"
+            value={formData.stockIn}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none"
+            required
+          />
         </div>
         <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Submit</button>
       </form>
