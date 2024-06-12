@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const barangMasukData = [
@@ -8,22 +8,51 @@ const barangMasukData = [
 ];
 
 const BarangMasuk = () => {
+  const [filter, setFilter] = useState('');
+  const [itemsToShow, setItemsToShow] = useState('10');
   const navigate = useNavigate();
 
-  // Fungsi buat navigasi ke halaman Entri Data buat barang masuk
   const handleAddEntry = () => {
     navigate('/entri-barang-masuk');  
   };
+
+  const handleSearchChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredData = barangMasukData.filter(item => 
+    item.transactionId.toLowerCase().includes(filter.toLowerCase()) ||
+    item.type.toLowerCase().includes(filter.toLowerCase())
+  ).slice(0, parseInt(itemsToShow));
 
   return (
     <div className="p-5">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Barang Masuk</h1>
+        <button onClick={handleAddEntry} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          + Entri Data
+        </button>
+      </div>
+      <div className="flex justify-between mb-4">
         <div>
-          <button onClick={handleAddEntry} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            + Entri Data
-          </button>
+          <label htmlFor="itemsToShow">Show</label>
+          <select 
+            value={itemsToShow} 
+            onChange={(e) => setItemsToShow(e.target.value)} 
+            className="mx-2 p-1 border rounded">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+          items
         </div>
+        <input 
+          type="text" 
+          placeholder="Search by transaction ID or type" 
+          value={filter} 
+          onChange={handleSearchChange} 
+          className="px-3 py-2 border rounded shadow-sm focus:outline-none"
+        />
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded-lg">
@@ -38,7 +67,7 @@ const BarangMasuk = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700">
-            {barangMasukData.map((item, index) => (
+            {filteredData.map((item, index) => (
               <tr key={item.id} className="hover:bg-gray-100">
                 <td className="text-left py-3 px-4">{index + 1}</td>
                 <td className="text-left py-3 px-4">{item.transactionId}</td>
