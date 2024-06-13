@@ -18,7 +18,7 @@ import ManajemenUser from './Pages/Manajemen User/ManajemenUser';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename='/TSM'>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<WithSidebar><Dashboard /></WithSidebar>} />
