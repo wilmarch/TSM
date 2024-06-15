@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { FaPlus, FaTrashAlt, FaBars, FaEdit } from 'react-icons/fa';  // Updated icon imports
+import { FaPlus, FaTrashAlt, FaBars, FaEdit } from 'react-icons/fa'; 
 
 const ItemsType = () => {
   const [types, setTypes] = useState([]);
@@ -27,9 +27,7 @@ const ItemsType = () => {
 
   const handleDelete = (typeId) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      // Here you can add logic to actually delete the item from the backend or state
       console.log("Item deleted:", typeId);
-      // Optionally update the state to reflect the deletion
       setTypes(types.filter(type => type.id !== typeId));
     }
   };

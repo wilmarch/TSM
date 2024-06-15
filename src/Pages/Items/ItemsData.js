@@ -26,7 +26,6 @@ const ItemsData = () => {
 
   const handleDelete = (itemId) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
-      // Filters out the item with the matching itemId and updates the state
       setItems(currentItems => currentItems.filter(item => item.id !== itemId));
       console.log("Item deleted:", itemId);
     }
@@ -61,7 +60,7 @@ const ItemsData = () => {
         </div>
         <input 
           type="text" 
-          placeholder="Search by part number or manufacture" 
+          placeholder="Search..." 
           value={filter} 
           onChange={handleSearchChange} 
           className="px-3 py-2 border rounded shadow-sm focus:outline-none"
