@@ -64,7 +64,7 @@ function Sidebar() {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
               < FaWarehouse className="text-lg" />
-              <span>Barang</span>
+              <span>Transaksi</span>
             </div>
             {isTransaksiOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
