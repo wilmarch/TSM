@@ -35,12 +35,12 @@ function AuthForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex flex-wrap w-full max-w-4xl shadow-lg rounded-lg overflow-hidden">
-      <div className="w-full md:w-1/2 bg-cover bg-center" style={{ backgroundImage: 'url("/Login.png")' }}>
+      <div className="w-full md:w-1/2 bg-cover bg-center" style={{ backgroundImage: 'url("https://cdn.windowsreport.com/wp-content/uploads/2019/11/Black-friday-3D-printers-for-engineers-886x590.jpg")' }}>
         </div>
         <div className="w-full md:w-1/2 bg-white p-4 md:p-8">
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col items-center justify-center flex-grow">
-            <img src="/Logo TSM.png" alt="Logo" className="mb-4 w-20" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZDDrQU3GGMT-VI0CqYqiaIy2F8Xn4MRShUg&s" alt="Logo" className="mb-4 w-20" />
               <h2 className="text-2xl font-bold mb-2">{isLogin ? 'Login' : 'Register'}</h2>
               <p className="mb-8">{isLogin ? 'Log into your account' : 'Create your account'}</p>
             </div>
