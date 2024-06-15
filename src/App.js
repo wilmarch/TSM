@@ -7,6 +7,7 @@ import ItemsData from './Pages/Items/ItemsData';
 import EntriItemsData from './Pages/Items/EntriItemsData';
 import ItemsType from './Pages/Items/ItemsType';
 import EntriItemsType from './Pages/Items/EntriItemsType';
+import ItemDescription from './Pages/Items/ItemDescription';
 import BarangMasuk from './Pages/Barang/BarangMasuk';
 import EntriBarangMasuk from './Pages/Barang/EntriBarangMasuk';
 import BarangKeluar from './Pages/Barang/BarangKeluar';
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/entri-items-data"element={<WithSidebar><EntriItemsData /></WithSidebar>} />
         <Route path="/items-type" element={<WithSidebar><ItemsType /> </WithSidebar> } />
         <Route path="/entri-items-type"element={<WithSidebar><EntriItemsType /></WithSidebar>} />
+        <Route path="/item-description/:id" element={<WithSidebar><ItemDescription /></WithSidebar>} />
         <Route path="/barang-masuk" element={<WithSidebar><BarangMasuk /></WithSidebar>} />
         <Route path="/entri-barang-masuk" element={<WithSidebar><EntriBarangMasuk /></WithSidebar>} />
         <Route path="/barang-keluar" element={<WithSidebar><BarangKeluar /></WithSidebar>} />

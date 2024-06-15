@@ -31,7 +31,9 @@ const ItemsData = () => {
     }
   };
   
-
+  const handleNavigateToDescription = (itemId) => {
+    navigate(`/item-description/${itemId}`); 
+  };
   const filteredItems = items.filter(item => 
     item.partNumber.toLowerCase().includes(filter.toLowerCase()) || 
     item.manufacture.toLowerCase().includes(filter.toLowerCase())
@@ -87,9 +89,13 @@ const ItemsData = () => {
                 <td className="text-left py-3 px-4">{item.currentStock}</td>
                 <td className="text-left py-3 px-4">{item.manufacture}</td>
                 <td className="text-left py-3 px-4">
-                  <button className="text-black-500 hover:text-red-500 px-4 py-2 rounded transition duration-150 ease-in-out" title="View Details">
-                    <FaBars />
-                  </button>
+                <button
+                  onClick={() => handleNavigateToDescription(item.id)}
+                  className="text-black-500 hover:text-red-500 px-4 py-2 rounded"
+                  title="View Details"
+                >
+                  <FaBars />
+                </button>
                   <button className="text-black-500 hover:text-red-500 px-4 py-2 rounded transition duration-150 ease-in-out" title="Edit Item">
                     <FaEdit />
                   </button>
