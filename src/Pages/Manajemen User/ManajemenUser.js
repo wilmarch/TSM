@@ -5,9 +5,7 @@ function ManajemenUser() {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: ''
+    Password: '',
   });
   const navigate = useNavigate();
 
@@ -29,9 +27,7 @@ function ManajemenUser() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <InputField label="Name" name="name" value={user.name} onChange={handleChange} />
           <InputField label="Email" type="email" name="email" value={user.email} onChange={handleChange} />
-          <PasswordInput label="Old Password" name="oldPassword" value={user.oldPassword} onChange={handleChange} />
-          <PasswordInput label="New Password" name="newPassword" value={user.newPassword} onChange={handleChange} />
-          <PasswordInput label="Confirm New Password" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
+          <PasswordInput label="Password" name="Password" value={user.oldPassword} onChange={handleChange} />
           <button type="submit" className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Save Changes
           </button>
