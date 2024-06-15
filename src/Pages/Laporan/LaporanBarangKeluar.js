@@ -43,7 +43,7 @@ const LaporanBarangKeluar = () => {
                         <tr>
                             <th className="px-4 py-3 uppercase font-semibold text-sm text-center">No</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Tanggal</th>
-                            <th className="px-4 py-3 uppercase font-semibold text-sm">Proyek</th>
+                            <th className="px-4 py-3 uppercase font-semibold text-sm">Project</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Type</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Part Number</th>
                             <th className="px-4 py-3 uppercase font-semibold text-sm">Manufacture</th>

@@ -45,7 +45,7 @@ function Sidebar() {
   <div className="flex justify-between items-center">
     <div className="flex items-center space-x-2">
       <FaBoxOpen className="text-lg" />
-      <span>Item</span>
+      <span>Master</span>
     </div>
     {isMasterOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
   </div>
