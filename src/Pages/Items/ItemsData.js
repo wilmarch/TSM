@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaPlus, FaTrashAlt, FaBars, FaEdit } from 'react-icons/fa'; 
 
 const ItemsData = () => {
   const [items, setItems] = useState([]);
@@ -12,7 +12,7 @@ const ItemsData = () => {
     setItems([
       { id: 1, partNumber: 'RLSGD2510VIC', category: 'Component', currentStock: 9487, manufacture: 'YAGEO' },
       { id: 2, partNumber: 'MUP-C7804I-1', category: 'Component', currentStock: 4189, manufacture: 'Samsung Electro-Mechanics' },
-      // Add more items as needed
+      // Tambahkan lebih banyak item sesuai kebutuhan
     ]);
   }, []);
 
@@ -23,6 +23,15 @@ const ItemsData = () => {
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
+
+  const handleDelete = (itemId) => {
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      // Filters out the item with the matching itemId and updates the state
+      setItems(currentItems => currentItems.filter(item => item.id !== itemId));
+      console.log("Item deleted:", itemId);
+    }
+  };
+  
 
   const filteredItems = items.filter(item => 
     item.partNumber.toLowerCase().includes(filter.toLowerCase()) || 
@@ -67,7 +76,7 @@ const ItemsData = () => {
               <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Category</th>
               <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Current Stock</th>
               <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Manufacture</th>
-              <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Action</th>
+              <th className="text-left py-3 px-16 uppercase font-semibold text-sm">Action</th>
             </tr>
           </thead>
           <tbody className="text-gray-700">
@@ -79,8 +88,13 @@ const ItemsData = () => {
                 <td className="text-left py-3 px-4">{item.currentStock}</td>
                 <td className="text-left py-3 px-4">{item.manufacture}</td>
                 <td className="text-left py-3 px-4">
-                <button className="text-red-500 hover:text-red-800 px-4 py-2 rounded transition duration-150 ease-in-out" 
-                title="Delete Item">
+                  <button className="text-black-500 hover:text-red-500 px-4 py-2 rounded transition duration-150 ease-in-out" title="View Details">
+                    <FaBars />
+                  </button>
+                  <button className="text-black-500 hover:text-red-500 px-4 py-2 rounded transition duration-150 ease-in-out" title="Edit Item">
+                    <FaEdit />
+                  </button>
+                  <button onClick={() => handleDelete(item.id)} className="text-black-500 hover:text-red-500 px-4 py-2 rounded transition duration-150 ease-in-out" title="Delete Item">
                     <FaTrashAlt />
                   </button>
                 </td>
