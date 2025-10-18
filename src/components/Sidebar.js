@@ -1,125 +1,113 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaHome, FaBoxOpen, FaChartLine, FaCog, FaWarehouse } from 'react-icons/fa';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import React, { useState, createContext, useContext, useEffect, useCallback } from 'react'; // useCallback ditambahkan di sini
+import { Link, useLocation } from 'react-router-dom';
+import { FaHome, FaBoxOpen, FaChartLine, FaCog, FaWarehouse, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { IoIosArrowDown } from 'react-icons/io';
 
-function Sidebar() {
-  const [isTransaksiOpen, setTransaksiOpen] = useState(false);
-  const [isLaporanOpen, setLaporanOpen] = useState(false);
-  const [isMasterOpen, setIsMasterOpen] = useState(false);
-  const [isPengaturanOpen, setIsPengaturanOpen] = useState(false);
+const menuItems = [
+    { name: 'Dashboard', icon: FaHome, path: '/dashboard' },
+    { name: 'Master', icon: FaBoxOpen, subItems: [{ name: 'Items Data', path: '/items-data' }, { name: 'Items Type', path: '/items-type' }] },
+    { name: 'Transaksi', icon: FaWarehouse, subItems: [{ name: 'Barang Masuk', path: '/barang-masuk' }, { name: 'Barang Keluar', path: '/barang-keluar' }] },
+    { name: 'Laporan', icon: FaChartLine, subItems: [{ name: 'Laporan Stock', path: '/laporan-stock' }, { name: 'Laporan Barang Masuk', path: '/laporan-barang-masuk' }, { name: 'Laporan Barang Keluar', path: '/laporan-barang-keluar' }] },
+    { name: 'Pengaturan', icon: FaCog, subItems: [{ name: 'Manajemen User', path: '/manajemen-user' }] },
+];
 
-  const toggleTransaksi = (event) => {
-    event.stopPropagation();
-    setTransaksiOpen(!isTransaksiOpen);
-  };
+const SidebarContext = createContext();
 
-  const toggleLaporan = (event) => {
-    event.stopPropagation();
-    setLaporanOpen(!isLaporanOpen);
-  };
+export default function Sidebar() {
+    const [isExpanded, setIsExpanded] = useState(true);
+    const location = useLocation();
 
-  const toggleMaster = (event) => {
-    event.stopPropagation();
-    setIsMasterOpen(!isMasterOpen);
-  };
+    const getActiveMenu = useCallback(() => {
+        const activeItem = menuItems.find(item => 
+            item.subItems && item.subItems.some(sub => sub.path === location.pathname)
+        );
+        return activeItem ? activeItem.name : null;
+    }, [location.pathname]);
 
-  const togglePengaturan = (event) => {
-    event.stopPropagation();
-    setIsPengaturanOpen(!isPengaturanOpen);
-  };
+    const [openMenu, setOpenMenu] = useState(getActiveMenu());
 
-  return (
-    <div className="w-64 bg-white text-gray-800 shadow-md">
-    <div className="p-5 border-b border-gray-300 text-center">
-      <img src="Logo TSM.png" alt="Logo TSM" className="mb-4 mx-auto w-20" />
-    </div>
-      <ul>
-        <li className="p-4 hover:bg-gray-100">
-          <Link to="/dashboard" className="flex items-center space-x-2">
-            <FaHome className="text-lg" />
-            <span>Dashboard</span>
-          </Link>
-        </li>
-        <li className="p-3 hover:bg-gray-100" onClick={toggleMaster}>
-  <div className="flex justify-between items-center">
-    <div className="flex items-center space-x-2">
-      <FaBoxOpen className="text-lg" />
-      <span>Master</span>
-    </div>
-    {isMasterOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-  </div>
-  {isMasterOpen && (
-    <ul className="ml-4 mt-2">
-      <li className="p-2 hover:bg-gray-200" onClick={(e) => e.stopPropagation()}>
-        <Link to="/items-data">Items Data</Link>
-      </li>
-      <li className="p-2 hover:bg-gray-200" onClick={(e) => e.stopPropagation()}>
-        <Link to="/items-type">Items Type</Link>
-      </li>
-    </ul>
-  )}
-</li>
-        <li className="p-3 hover:bg-gray-100" onClick={toggleTransaksi}>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              < FaWarehouse className="text-lg" />
-              <span>Transaksi</span>
-            </div>
-            {isTransaksiOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </div>
-          {isTransaksiOpen && (
-            <ul className="ml-4 mt-2">
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/barang-masuk">Barang Masuk</Link>
-              </li>
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/barang-keluar">Barang Keluar</Link>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li className="p-3 hover:bg-gray-100" onClick={toggleLaporan}>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <FaChartLine className="text-lg" />
-              <span>Laporan</span>
-            </div>
-            {isLaporanOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </div>
-          {isLaporanOpen && (
-            <ul className="ml-4 mt-2">
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/laporan-stock">Laporan Stock</Link>
-              </li>
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/laporan-barang-masuk">Laporan Barang Masuk</Link>
-              </li>
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/laporan-barang-keluar">Laporan Barang Keluar</Link>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li className="p-3 hover:bg-gray-100" onClick={togglePengaturan}>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <FaCog className="text-lg" />
-              <span>Pengaturan</span>
-            </div>
-            {isPengaturanOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </div>
-          {isPengaturanOpen && (
-            <ul className="ml-4 mt-2">
-              <li className="p-2 hover:bg-gray-200">
-                <Link to="/manajemen-user">Manajemen User</Link>
-              </li>
-            </ul>
-          )}
-        </li>
-      </ul>
-    </div>
-  );
+    const handleMenuClick = (name) => {
+        setOpenMenu(openMenu === name ? null : name);
+    };
+    
+    useEffect(() => {
+        setOpenMenu(getActiveMenu());
+    }, [location, getActiveMenu]);
+
+    return (
+        <aside className={`h-screen shadow-lg transition-all duration-300 ease-in-out ${isExpanded ? 'w-64' : 'w-20'}`}>
+            <nav className="h-full flex flex-col bg-white border-r border-gray-200">
+                {/* Header dengan logo di tengah */}
+                <div className={`py-8 flex items-center ${isExpanded ? 'justify-center' : 'justify-center'}`}>
+                    <img src="Logo TSM.png" alt="Logo TSM" className={`overflow-hidden transition-all duration-200 ${isExpanded ? 'w-32' : 'w-12'}`} />
+                </div>
+
+                <SidebarContext.Provider value={{ isExpanded }}>
+                    <ul className="flex-1 px-3">
+                        {menuItems.map((item) => (
+                            <SidebarItem 
+                                key={item.name} 
+                                item={item}
+                                isOpen={openMenu === item.name}
+                                onClick={() => handleMenuClick(item.name)}
+                            />
+                        ))}
+                    </ul>
+                </SidebarContext.Provider>
+                
+                {/* Tombol Toggle di bawah */}
+                <div className="border-t border-gray-200 p-3">
+                    <button onClick={() => setIsExpanded(curr => !curr)} className="p-3 w-full flex justify-center items-center rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-600">
+                        {isExpanded ? <FaChevronLeft /> : <FaChevronRight />}
+                    </button>
+                </div>
+            </nav>
+        </aside>
+    );
 }
 
-export default Sidebar;
+export function SidebarItem({ item, isOpen, onClick }) {
+    const { isExpanded } = useContext(SidebarContext);
+    const location = useLocation();
+    
+    const isChildActive = item.subItems && item.subItems.some(sub => location.pathname === sub.path);
+
+    if (!item.subItems) {
+        const isActive = location.pathname === item.path;
+        return (
+            <Link to={item.path} className={`relative flex items-center py-2.5 px-4 my-1 font-medium rounded-lg cursor-pointer transition-colors group ${isActive ? 'bg-red-100 text-red-700' : 'hover:bg-red-50 text-gray-600'}`}>
+                <item.icon size={20} />
+                <span className={`overflow-hidden transition-all ${isExpanded ? 'w-52 ml-4' : 'w-0'}`}>{item.name}</span>
+                {isActive && <div className={`absolute left-0 w-1 h-full bg-red-600 rounded-tr-lg rounded-br-lg`} />}
+                {!isExpanded && ( <div className="absolute left-full rounded-md px-2 py-1 ml-6 bg-red-600 text-white text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0">{item.name}</div> )}
+            </Link>
+        );
+    }
+
+    return (
+        <div className="relative transition-colors group rounded-lg">
+            <div onClick={onClick} className={`flex items-center justify-between py-2.5 px-4 my-1 font-medium cursor-pointer rounded-lg hover:bg-red-50 ${isChildActive ? 'text-red-700' : 'text-gray-600'}`}>
+                <div className="flex items-center">
+                    <item.icon size={20} />
+                    <span className={`overflow-hidden transition-all ${isExpanded ? 'w-36 ml-4' : 'w-0'}`}>{item.name}</span>
+                </div>
+                {isExpanded && <IoIosArrowDown className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />}
+            </div>
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen && isExpanded ? 'max-h-screen' : 'max-h-0'}`}>
+                <ul className="pl-8 border-l-2 border-gray-200 ml-6 my-2">
+                    {item.subItems.map(subItem => {
+                        const isSubActive = location.pathname === subItem.path;
+                        return (
+                            <Link to={subItem.path} key={subItem.name} className={`relative flex items-center py-1.5 px-2 my-1 text-sm rounded-md transition-colors ${isSubActive ? 'text-red-700 font-semibold' : 'text-gray-500 hover:text-red-600'}`}>
+                                {isSubActive && <div className="absolute left-[-1.57rem] w-2 h-2 bg-red-600 rounded-full" />}
+                                {subItem.name}
+                            </Link>
+                        );
+                    })}
+                </ul>
+            </div>
+            {!isExpanded && ( <div className="absolute left-full rounded-md px-2 py-1 ml-6 bg-red-600 text-white text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0">{item.name}</div> )}
+        </div>
+    );
+}
